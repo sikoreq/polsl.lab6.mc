@@ -30,9 +30,8 @@ void Bank::handleMessage(cMessage *msg)
 	}
 	else // przyp³yniêcie lub odp³yniêcie promu
 	{
-        MyMessage *mymsg = (MyMessage*) msg;
-        maxPassengers = mymsg->getNoLeftPass();
-        delete mymsg;
+        maxPassengers = ((MyMessage*)msg)->getNoLeftPass();
+        delete msg;
 
         sendPassengers();
 		// do wype³nienia

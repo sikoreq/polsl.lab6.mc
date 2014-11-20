@@ -19,7 +19,6 @@ void Ferryboat::initialize()
 	maxPass = par("maxPassengers");
 	noPass = 0;
 	noLeftPass = 0;
-	noOutOfRangePass = 0;
 	ferryState = 3;
 	truncCT=par("truncCrossingTime");
 	ferryEndMsg = new cMessage("ferry end of state");
@@ -44,20 +43,17 @@ void Ferryboat::handleMessage(cMessage *msg)
 	{
 	    MyMessage* mymsg = (MyMessage*) msg;
 
-	    int peopleArrived = 0;
-
-	    if(mymsg->getNoPass() > noLeftPass) {
-	        peopleArrived = noLeftPass;
+	    //jesli mamy miejsca do przyjmujemy pasazerow
+	    if(mymsg->getNoPass()+noPass <= maxPass) {
+	        noPass += mymsg->getNoPass();
+	        noLeftPass = mymsg->getNoLeftPass();
 	    }
 	    else {
-	        peopleArrived = mymsg->getNoPass();
+	        noPass = maxPass;
+	        noLeftPass = mymsg->getNoLeftPass();
 	    }
 
-        noPass += peopleArrived;
-        noLeftPass -= peopleArrived;
-        noOutOfRangePass = mymsg->getNoLeftPass();
-
-        if(noLeftPass == 0) {
+        if(noPass == maxPass) {
             // ODPLYWAMY!
             cancelEvent(ferryEndMsg);
             scheduleAt(simTime(), ferryEndMsg);
@@ -97,11 +93,11 @@ void Ferryboat::changeState(cMessage *msg)
 			scheduleAt(simTime()+getOnTime, ferryEndMsg);
 
 			noPass = 0;
+			//przekazujemy informacje i ilosci wolnych miejsc na brzeg
 			noLeftPass = maxPass;
-			noOutOfRangePass = 0;
 
 			przyplyniecie = new MyMessage();
-            przyplyniecie->setNoPass(noPass);
+            //przyplyniecie->setNoPass(noPass);
             przyplyniecie->setNoLeftPass(maxPass);
 			send(przyplyniecie, "ioA$o");
 
@@ -112,12 +108,12 @@ void Ferryboat::changeState(cMessage *msg)
 				sprintf(buf,"--> pass: %ld", noPass);
 				getDisplayString().setTagArg("t",0,buf);
 			}
-			// do wype³nienia
 
 			// odplyniecie
 			// zaplanowanie przyplyniecia
 			scheduleAt(simTime()+truncCT + par("crossingTimeA"), ferryEndMsg);
 
+			//Wysylamy informacje, ze nie ma juz wolnych miejsc (prom odplynal)
 			przyplyniecie = new MyMessage();
             przyplyniecie->setNoPass(0);
             przyplyniecie->setNoLeftPass(0);
@@ -126,7 +122,7 @@ void Ferryboat::changeState(cMessage *msg)
             // statystyki
             histA.collect(noPass);
             vectorNoPassA.record(noPass);
-            vectorNoLeftPassA.record(noOutOfRangePass);
+            vectorNoLeftPassA.record(noLeftPass);
 
 			break;
   	case 2: //B
@@ -140,11 +136,11 @@ void Ferryboat::changeState(cMessage *msg)
             scheduleAt(simTime()+getOnTime, ferryEndMsg);
 
             noPass = 0;
+            //przekazujemy informacje i ilosci wolnych miejsc na brzeg
             noLeftPass = maxPass;
-            noOutOfRangePass = 0;
 
             przyplyniecie = new MyMessage();
-            przyplyniecie->setNoPass(noPass);
+            //przyplyniecie->setNoPass(noPass);
             przyplyniecie->setNoLeftPass(maxPass);
             send(przyplyniecie, "ioB$o");
 
@@ -169,7 +165,7 @@ void Ferryboat::changeState(cMessage *msg)
             // statystyki
             histB.collect(noPass);
             vectorNoPassB.record(noPass);
-            vectorNoLeftPassB.record(noOutOfRangePass);
+            vectorNoLeftPassB.record(noLeftPass);
 
 			break;
 	}

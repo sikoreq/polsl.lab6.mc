@@ -8,7 +8,7 @@
 class Ferryboat : public cSimpleModule
 {
 private:
-  long getOnTime, noOutOfRangePass;
+  long getOnTime;
   long noPass, noLeftPass, maxPass;
         int ferryState; //0 - A, 1 - z A do B, 2 - B, 3 - z B do A
         simtime_t truncCT;
