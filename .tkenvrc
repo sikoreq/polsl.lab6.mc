@@ -1,0 +1,10 @@
+# Partial OMNeT++/Tkenv config file -- see $HOME/.tkenvrc as well
+config default-configname	{}
+config default-runnumber	{}
+inspector {ferry.ferryboat.passengers from B} cLongHistogram {} 2 386x321+100+-992:normal
+inspector {ferry.ferryboat.Left A->B} cOutVector {} 2 386x327+506+-625:normal
+inspector {ferry.ferryboat.Left B->A} cOutVector {} 2 386x327+506+-991:normal
+inspector ferry.ferryboat.B->A cOutVector {} 2 386x327+927+-996:normal
+inspector ferry.ferryboat.A->B cOutVector {} 2 390x298+928+-627:normal
+inspector {ferry.ferryboat.passengers from A} cLongHistogram {} 2 386x321+97+-632:normal
+
