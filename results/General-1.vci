@@ -1,0 +1,26 @@
+file 42076 1416588807                                           
+version 2
+run General-1-20141121-17:53:27-7252
+attr configname General
+attr datetime 20141121-17:53:27
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars $0=20
+attr iterationvars2 "$0=20, $repetition=0"
+attr measurement $0=20
+attr network ferry
+attr processid 7252
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 1
+attr seedset 1
+
+vector 4  ferry.ferryboat  A->B  ETV
+vector 6  ferry.ferryboat  "Left A->B"  ETV
+vector 5  ferry.ferryboat  B->A  ETV
+vector 7  ferry.ferryboat  "Left B->A"  ETV
+4	559 10538 10 24399 300 599923.606984892474 339 1 20 4855 74185
+5	11097 10531 48 24359 1309.208956650936 598971.874789116325 338 4 20 4901 76047
+6	21628 10229 10 24399 300 599923.606984892474 339 0 5 18 54
+7	31857 10219 48 24359 1309.208956650936 598971.874789116325 338 0 6 16 58

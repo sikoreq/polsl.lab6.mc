@@ -1,9 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
+<scave:Analysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:scave="http://www.omnetpp.org/omnetpp/scave">
   <inputs>
     <inputs name="/ferry_b/results/General-*.vec"/>
     <inputs name="/ferry_b/results/General-*.sca"/>
   </inputs>
-  <datasets/>
-  <chartSheets/>
+  <datasets>
+    <datasets name="ferry">
+      <items xsi:type="scave:Add" filterPattern="name(&quot;A->B&quot;) " type="VECTOR"/>
+      <items xsi:type="scave:LineChart" name="Liczba pasażerów na promie (A->B)" lineNameFormat="">
+        <properties name="Graph.Title" value="Liczba pasażerów na promie (A->B)"/>
+        <properties name="X.Axis.Title" value="czas"/>
+        <properties name="Y.Axis.Title" value="liczba pasażerów"/>
+        <properties name="Legend.Display" value="true"/>
+        <properties name="Legend.Border" value="true"/>
+        <properties name="Line.Name//ferry_b/results/General-0.vec General-0-20141121-17:53:27-7252 0 $0=15" value="Pojemność promu 15"/>
+        <properties name="Line.Name//ferry_b/results/General-1.vec General-1-20141121-17:53:27-7252 1 $0=20" value="Pojemność promu 20"/>
+        <properties name="Line.Type" value="Linear"/>
+      </items>
+      <items xsi:type="scave:Discard" filterPattern="" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="name(B->A)" type="VECTOR"/>
+      <items xsi:type="scave:LineChart" name="Liczba pasażerów na promie (B->A)" lineNameFormat="">
+        <properties name="Graph.Title" value="Liczba pasażerów na promie (B->A)"/>
+        <properties name="X.Axis.Title" value="czas"/>
+        <properties name="Y.Axis.Title" value="liczba pasażerów"/>
+        <properties name="Legend.Display" value="true"/>
+        <properties name="Legend.Border" value="true"/>
+        <properties name="Line.Name//ferry_b/results/General-0.vec General-0-20141121-17:53:27-7252 0 $0=15" value="Pojemność promu 15"/>
+        <properties name="Line.Name//ferry_b/results/General-1.vec General-1-20141121-17:53:27-7252 1 $0=20" value="Pojemność promu 20"/>
+      </items>
+      <items xsi:type="scave:Discard" filterPattern="" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="name(&quot;Left A->B&quot;)" type="VECTOR"/>
+      <items xsi:type="scave:LineChart" name="Liczba osób, którzy pozostali na brzegu A" lineNameFormat="">
+        <properties name="Graph.Title" value="Liczba osób, którzy pozostali na brzegu A"/>
+        <properties name="X.Axis.Title" value="czas"/>
+        <properties name="Y.Axis.Title" value="liczba osób"/>
+        <properties name="Legend.Display" value="true"/>
+        <properties name="Legend.Border" value="true"/>
+        <properties name="Line.Name//ferry_b/results/General-0.vec General-0-20141121-17:53:27-7252 0 $0=15" value="Pojemność promu 15"/>
+        <properties name="Line.Name//ferry_b/results/General-1.vec General-1-20141121-17:53:27-7252 1 $0=20" value="Pojemność promu 20"/>
+      </items>
+      <items xsi:type="scave:Discard" filterPattern="" type="VECTOR"/>
+      <items xsi:type="scave:Add" filterPattern="name(&quot;Left B->A&quot;)" type="VECTOR"/>
+      <items xsi:type="scave:LineChart" name="Liczba osób, którzy pozostali na brzegu B" lineNameFormat="">
+        <properties name="Graph.Title" value="Liczba osób, którzy pozostali na brzegu B"/>
+        <properties name="X.Axis.Title" value="czas"/>
+        <properties name="Y.Axis.Title" value="liczba osób"/>
+        <properties name="Legend.Display" value="true"/>
+        <properties name="Line.Name//ferry_b/results/General-0.vec General-0-20141121-17:53:27-7252 0 $0=15" value="Pojemność promu 15"/>
+        <properties name="Line.Name//ferry_b/results/General-1.vec General-1-20141121-17:53:27-7252 1 $0=20" value="Pojemność promu 20"/>
+      </items>
+      <items xsi:type="scave:Add" filterPattern="name(&quot;passengers from A&quot;)" type="HISTOGRAM"/>
+      <items xsi:type="scave:HistogramChart" name="Rozkład liczby pasażerów zabranych z brzegu A">
+        <properties name="Graph.Title" value="Rozkład prawdopodobieństwa liczby pasażerów zabranych z brzegu A"/>
+        <properties name="X.Axis.Title" value="liczba pasażerów"/>
+        <properties name="Y.Axis.Title" value="prawdopodobienstwo"/>
+        <properties name="Legend.Display" value="true"/>
+        <properties name="Legend.Border" value="true"/>
+        <properties name="Hist.Bar" value="Outline"/>
+        <properties name="Hist.Data" value="Pdf"/>
+        <properties name="Hist.ShowOverflowCell" value="true"/>
+      </items>
+      <items xsi:type="scave:Discard" filterPattern="" type="HISTOGRAM"/>
+      <items xsi:type="scave:Add" filterPattern="name(&quot;passengers from B&quot;)" type="HISTOGRAM"/>
+      <items xsi:type="scave:HistogramChart" name="Rozkład liczby pasażerów zabranych z brzegu B">
+        <properties name="Graph.Title" value="Rozkład liczby pasażerów zabranych z brzegu B"/>
+        <properties name="X.Axis.Title" value="liczba pasażerów"/>
+        <properties name="Y.Axis.Title" value="prawdopodobieństwo"/>
+        <properties name="Legend.Display" value="true"/>
+        <properties name="Legend.Border" value="true"/>
+        <properties name="Hist.Bar" value="Outline"/>
+        <properties name="Hist.Data" value="Pdf"/>
+        <properties name="Hist.ShowOverflowCell" value="true"/>
+      </items>
+      <items xsi:type="scave:Discard" filterPattern="" type="HISTOGRAM"/>
+    </datasets>
+  </datasets>
+  <chartSheets>
+    <chartSheets name="default" charts="//@datasets/@datasets.0/@items.1 //@datasets/@datasets.0/@items.7 //@datasets/@datasets.0/@items.12 //@datasets/@datasets.0/@items.4 //@datasets/@datasets.0/@items.10 //@datasets/@datasets.0/@items.15"/>
+  </chartSheets>
 </scave:Analysis>
